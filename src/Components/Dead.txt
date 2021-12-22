@@ -1,0 +1,71 @@
+/** @format */
+import { useEffect, useState } from 'react';
+import { getUsers } from '../Service/api';
+import Table from '@material-ui/core/Table';
+import { TableCell, TableHead, TableRow, TableBody } from '@material-ui/core';
+
+const Alluser = () => {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    // equilvalent to component did mount
+    getAllUsers();
+  }, []);
+
+  const getAllUsers = async () => {
+    const response = await getUsers();
+    setUsers(response.data);
+    console.log(response.data);
+  };
+
+  return (
+    <Table>
+      <TableHead>
+        <TableRow>
+          <TableCell>Id</TableCell>
+          <TableCell>Name</TableCell>
+          <TableCell>Username</TableCell>
+          <TableCell>Phone</TableCell>
+          <TableCell>Email</TableCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        {users.map((user) => (
+          <TableRow>
+            <TableCell>{user.id}</TableCell>
+            <TableCell>{user.name}</TableCell>
+            <TableCell>{user.username}</TableCell>
+            <TableCell>{user.phone}</TableCell>
+            <TableCell>{user.email}</TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  );
+};
+
+export default Alluser;
+
+
+
+
+/** @format */
+import { useEffect } from 'react';
+import { getUsers } from '../Service/api';
+
+const Alluser = () => {
+  useEffect(() => {
+    // equilvalent to component did mount
+    getAllUsers();
+  }, []);
+
+  const getAllUsers = async () => {
+    const response = await getUsers();
+
+    console.log(response.data);
+  };
+
+  return <h1>Hii</h1>;
+};
+
+export default Alluser;
